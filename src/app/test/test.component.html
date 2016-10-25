@@ -1,0 +1,94 @@
+<!--
+<div class="container">
+	<div class="row">
+		<p>Lista de Alumnos</p>
+		<ul *ngFor="let alumno of alumnos">
+			<li>{{alumno.name}}</li>
+			<li>{{alumno.promedio}}</li>
+			<li>{{alumno.edad}}</li>
+			<li>{{alumno.regular}}</li>
+			<li *ngIf="alumno.faltas >= 4" >{{getFaltas(alumno)}}</li>
+			<li>
+				<div class="input-group">
+					<div class="input-group-addon">Qty</div>
+					<input type="text" class="form-control" [(ngModel)]="alumno.faltas" placeholder="Qty">
+				</div>
+				<div class="separator clear-left">
+					<p class="btn-add">
+						<i class="fa fa-shopping-cart"></i>
+						<a (click)="addFalta(alumno)" class="hidden-sm">Agregar Falta</a>
+					</p>
+					<p class="btn-details">
+						<i class="glyphicon glyphicon-trash"></i>
+						<a (click)="removeFalta(alumno)" class="hidden-sm">Quitar Falta</a>
+					</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+-->
+<div class="container">
+	<div class="row">
+		Total: {{total() | currency:'MXN':true}}
+	</div>
+	<div class="row">
+		<div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="item active">
+					<div class="row">
+						<div class="col-sm-3" *ngFor="let producto of productos">
+							<div class="col-item">
+								<div class="photo">
+									<img [src]="producto.imagen" [alt]="producto.descripcion" [class]="img-responsive" [width]="350" [height]="260" />
+								</div>
+								<div class="info">
+									<div class="row">
+										<div class="price col-md-6">
+											<h5 [class.sold_out]="quedan(producto) == 0" >{{producto.id}} - {{producto.name | uppercase}}</h5>
+											<!-- <h5>{{producto.sku}}</h5> -->
+											<h5 class="price-text-color">{{producto.price | currency:'MXN':true}}</h5>
+										</div>
+										<div class="rating hidden-sm col-md-6">
+											<i class="price-text-color fa fa-star"></i>
+											<i class="price-text-color fa fa-star"></i>
+											<i class="price-text-color fa fa-star"></i>
+											<i class="price-text-color fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+									</div>
+									<div class="clear-center">
+										<p>{{producto.descripcion}}</p>
+										<p>{{quedan(producto)}}</p>
+										<p class="sold_out" *ngIf="quedan(producto) == 0">Sold Out!!</p>
+										<p *ngIf="producto.qty > producto.stock">No Hay suficientes para tu orden</p>
+										<p *ngIf="producto.qty > 0" >{{pedido(producto)}}</p>
+									</div>
+									<div class="separator clear-center">
+										<p class="text-center">
+											<div class="input-group">
+												<div class="input-group-addon">Qty</div>
+												<input type="text" class="form-control" [(ngModel)]="producto.qty" placeholder="Qty">
+											</div>
+										</div>
+										<div class="separator clear-left">
+											<p class="btn-add">
+												<i class="fa fa-shopping-cart"></i>
+												<a (click)="addProducto(producto)" class="hidden-sm">Add to cart</a>
+											</p>
+											<p class="btn-details">
+												<i class="glyphicon glyphicon-trash"></i>
+												<a (click)="removeProducto(producto)" class="hidden-sm">Remove to cart</a>
+											</p>
+										</div>
+										<div class="clearfix">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

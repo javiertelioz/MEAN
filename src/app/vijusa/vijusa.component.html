@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>						
+						<th>Email</th>
+						<th>Twitter</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let alumno of alumnos">
+						<td>{{alumno.id}}</td>
+						<td>{{alumno.first_name}}</td>
+						<td>{{alumno.last_name}}</td>
+						<td>{{alumno.email}}</td>
+						<td>{{alumno.twitter}}</td>
+						<!-- <td>
+							<a (click)="play(song)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-play-circle"></i></a>
+						</td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

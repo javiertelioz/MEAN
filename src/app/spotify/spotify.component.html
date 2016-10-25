@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+		<h1>Spotify</h1>
+		<div class="input-group">
+			<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-music"></i></span>
+			<input #searchBox type="text" class="form-control" placeholder="Search.." (keyup)="search(searchBox.value)">
+		</div>
+		<hr>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Artista</th>
+						<th>Duracion</th>
+						<th>Album</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let song of songs">
+						<td>{{song.name}}</td>
+						<td>{{song.artista}}</td>
+						<td>{{song.duration_ms}}</td>
+						<td><img [src]="song.album.images[0].url" [class]="img-responsive" [width]="50" [height]="50"></td>
+						<td>
+							<a (click)="play(song)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-play-circle"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
