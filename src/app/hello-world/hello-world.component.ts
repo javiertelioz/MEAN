@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 
+import {Observable} from 'rxjs/Rx';
+
 import { AlumnoService } from './services/alumno.services';
 
 import { Alumno } from './alumno';
@@ -22,13 +24,10 @@ export class HelloWorldComponent implements OnInit {
   private isLoading = true;
 
   private cat = {};
-  private isEditing = false;
 
-  private addCatForm: FormGroup;
-  private name = new FormControl("", Validators.required);
-  private age = new FormControl("", Validators.required);
-  private weight = new FormControl("", Validators.required);
+  private model = new Alumno();
 
+  private editing = false;
   private infoMsg = { body: "", type: "info"};
 
   constructor(private http: Http,
@@ -37,24 +36,36 @@ export class HelloWorldComponent implements OnInit {
 
   ngOnInit() {
     this.getAlumnos();
-  	/*this.getCats();
-
-    this.addCatForm = this.formBuilder.group({
-      name: this.name,
-      age: this.age,
-      weight: this.weight
-    });*/
-
-    this.alumnos = ALUMNOS;
+    //this.alumnos = ALUMNOS;
   }
 
   getAlumnos() {
     this.alumnoService.getAlumnos()
       .subscribe(
-        data => this.cats = data,
+        data => this.alumnos = data,
         error => console.log(error),
         () => this.isLoading = false
-        );
+      );
+  }
+
+  submitComment() {
+    
+    console.log(this.model);
+    let commentOperation:Observable<Alumno[]>;
+    if(!this.editing){
+      // Create a new comment
+      commentOperation = this.alumnoService.addAlumno(this.model)
+    } else {
+      // Update an existing comment
+      commentOperation = this.alumnoService.updateAlumno(this.model)
+    }
+
+    commentOperation.subscribe(
+      data => console.log(data),
+      error => console.log(error),
+      () => this.isLoading = false);
+
+    this.getAlumnos();
   }
 
   /*getCats() {

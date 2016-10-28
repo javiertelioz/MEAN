@@ -20,10 +20,5 @@ export const APP_ROUTES = [
 	{
 		path: 'spotify',
 		component: SpotifyComponent
-	},
-	{
-		path: 'vijusa',
-		component: VijusaComponent
 	}
-
 ]

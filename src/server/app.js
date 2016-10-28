@@ -35,7 +35,7 @@ require('./routers/alumno.js')(app);
 require('./routers/producto.js')(app);
 
 // all other routes are handled by Angular
-app.get('/*', function(req, res) {
+app.get('/app/*', function(req, res) {
   res.sendFile(path.join(__dirname,'/../../dist/index.html'));
 });
 

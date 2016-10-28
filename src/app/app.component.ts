@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { TestComponent } from './test/test.component';
 
+import { CONFIG_APP } from './config/app';
+
+import { AuthService } from './services/auth/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,5 +13,8 @@ import { TestComponent } from './test/test.component';
 })
 export class AppComponent {
 
-	title = 'Curso de Angular 2';
+	title = CONFIG_APP.APP_NAME;
+
+	constructor(public auth:AuthService) {
+	}
 }

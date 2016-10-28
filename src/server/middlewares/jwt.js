@@ -6,6 +6,7 @@ var JWT = function(req, res, next) {
   console.log('Request URL:', req.originalUrl);
 
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token, Content-Length, X-Requested-With,');
@@ -13,7 +14,7 @@ var JWT = function(req, res, next) {
   /*if ('OPTIONS' == req.method) {
     res.sendStatus(200)
   }*/
-  console.log(routersAllow.indexOf(req.originalUrl));
+  //console.log(routersAllow.indexOf(req.originalUrl));
   if(routersAllow.indexOf(req.originalUrl))
   {
     return next();
