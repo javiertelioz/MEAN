@@ -6,7 +6,7 @@ import { VijusaComponent } from './vijusa/vijusa.component';
 
 export const APP_ROUTES = [
 	{
-		path: '',
+		path: 'home',
 		component: HomeComponent
 	},
 	{
@@ -20,5 +20,9 @@ export const APP_ROUTES = [
 	{
 		path: 'spotify',
 		component: SpotifyComponent
-	}
+	},
+	{
+		path: '**',
+		component: HomeComponent
+	},
 ]

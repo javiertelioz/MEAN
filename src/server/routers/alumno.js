@@ -1,9 +1,7 @@
 // Alumno Model
-var cors = require('cors');
 var Alumno = require('../models/alumno.model.js');
 
 module.exports = function(app) {
-  app.options('/api/alumno', cors());
   // Get all Alumno
   app.get('/api/alumnos', function(req, res) {
     Alumno.find({}, function(err, docs) {
@@ -30,13 +28,12 @@ module.exports = function(app) {
           'message': 'alumno with id: ' + req.params.id + ' no found' 
         });
       }
-
       res.json(obj);
     })
   });
 
   // Create new Alumno
-  app.post('/api/alumno', cors(), function(req, res) {
+  app.post('/api/alumno', function(req, res) {
     var obj = new Alumno(req.body);
     obj.save(function(err, obj) {
       if(err) {
@@ -48,8 +45,7 @@ module.exports = function(app) {
   });
 
   // Update Alumno By ID
-  app.options('/api/alumno/:id', cors());
-  app.put('/api/alumno/:id', cors(), function(req, res) {
+  app.put('/api/alumno/:id', function(req, res) {
     console.log(req.params);
     Alumno.findOneAndUpdate({_id: req.params.id}, req.body, function(err, obj) {
       if(err) return console.error(err);
@@ -58,7 +54,7 @@ module.exports = function(app) {
   });
 
   // Delete Alumno By ID
-  app.delete('/api/alumno/:id', cors(), function(req, res) {
+  app.delete('/api/alumno/:id', function(req, res) {
     Alumno.findOneAndRemove({_id: req.params.id}, function(err, obj) {
       if(err) return console.error(err);
       res.status(200).json(obj);
