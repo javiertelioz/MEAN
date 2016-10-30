@@ -11,7 +11,7 @@ import { Alumno } from '../alumno';
 @Injectable()
 export class AlumnoService {
 
-	private headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*', 'charset': 'UTF-8' });
+	private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
 
 	constructor(private http: Http) {}
@@ -47,7 +47,7 @@ export class AlumnoService {
 		let bodyString = JSON.stringify(body); 
 		
 		// Using post request
-		return this.http.post(CONFIG_APP.APP_API_HOST + 'api/alumno', body, this.options) 
+		return this.http.post(CONFIG_APP.APP_API_HOST + 'api/alumno', bodyString, this.options) 
 		.map((res:Response) => res.json())
 		.catch(this.handleError);
 	}
@@ -61,7 +61,7 @@ export class AlumnoService {
 		let bodyString = JSON.stringify(body);
 
 		// Using put request
-		return this.http.put(CONFIG_APP.APP_API_HOST + `api/alumno/${body['id']}`, body, this.options)
+		return this.http.put(CONFIG_APP.APP_API_HOST + `api/alumno/${body['_id']}`, bodyString, this.options)
 			.map((res:Response) => res.json())
 			.catch(this.handleError);
 	}

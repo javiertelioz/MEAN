@@ -2,7 +2,7 @@ import { Alumno } from './alumno';
 
 export const ALUMNOS:Alumno[] = [
 	{
-		id: 1,
+		_id: 1,
 		name: 'Javier',
 		promedio: 8,
 		edad: 25,
@@ -10,7 +10,7 @@ export const ALUMNOS:Alumno[] = [
 		faltas: 0,
 	},
 	{
-		id: 2,
+		_id: 2,
 		name: 'Pedro',
 		promedio: 8,
 		edad: 19,
@@ -18,7 +18,7 @@ export const ALUMNOS:Alumno[] = [
 		faltas: 0,
 	},
 	{
-		id: 3,
+		_id: 3,
 		name: 'Juan',
 		promedio: 6,
 		edad: 24,
@@ -26,7 +26,7 @@ export const ALUMNOS:Alumno[] = [
 		faltas: 0,
 	},
 	{
-		id: 4,
+		_id: 4,
 		name: 'David',
 		promedio: 8,
 		edad: 23,
@@ -34,7 +34,7 @@ export const ALUMNOS:Alumno[] = [
 		faltas: 0,
 	},
 	{
-		id: 5,
+		_id: 5,
 		name: 'Alonso',
 		promedio: 10,
 		edad: 19,

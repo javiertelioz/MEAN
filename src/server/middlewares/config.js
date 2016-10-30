@@ -1,6 +1,6 @@
 module.exports = [
-	'/api/authenticate',
 	'/api/token',
-	'/api/alumnos',
-	'/api/alumno'
+	'/api/authenticate',
+	'/api/alumno',
+	'/api/alumnos'
 ];

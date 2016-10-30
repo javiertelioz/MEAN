@@ -1,4 +1,10 @@
 <div class="container">
+  <div [hidden]="!infoMsg.body" class="alert alert-{{infoMsg.type}} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Message:</strong> {{infoMsg.body}}
+  </div>
   <div class="row">
     <h1>Lista de Alumnos </h1>
   </div>
@@ -18,7 +24,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let alumno of alumnos">
-          <td>{{alumno.id}}</td>
+          <td>
+            <button class="btn btn-primary btn-xs" (click)="deleteAlumno(alumno)"><i class="glyphicon glyphicon glyphicon-trash"></i></button>
+            <button class="btn btn-warning btn-xs" (click)="enableEditing(alumno)"><i class="glyphicon glyphicon-pencil"></i></button>
+          </td>
           <td>{{alumno.name}}</td>
           <td>{{alumno.promedio}}</td>
           <td>{{alumno.edad}}</td>
@@ -35,7 +44,7 @@
   </div>
   <br>
   <div class="row">
-    <form (ngSubmit)="submitComment()">
+    <form (ngSubmit)="newAlumno()">
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
@@ -57,6 +66,7 @@
         <br /> -->
         <button *ngIf="!editing" type="submit" class="btn btn-primary btn-block">Add</button>
         <button *ngIf="editing" type="submit" class="btn btn-warning btn-block">Update</button>
+        <button *ngIf="editing" class="btn btn-danger btn-block" (click)="cancelEditing()"><i class="glyphicon glyphicon-time"></i> Cancel</button>
       </div>
     </form>
   </div>

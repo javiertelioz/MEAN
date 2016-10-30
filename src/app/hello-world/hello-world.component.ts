@@ -19,12 +19,7 @@ import { ALUMNOS } from './mocks';
 export class HelloWorldComponent implements OnInit {
 
   private alumnos: Alumno[];
-  
-	private cats = [];
   private isLoading = true;
-
-  private cat = {};
-
   private model = new Alumno();
 
   private editing = false;
@@ -48,23 +43,54 @@ export class HelloWorldComponent implements OnInit {
       );
   }
 
-  submitComment() {
-    
-    console.log(this.model);
+  deleteAlumno(alumno) {
+    if(window.confirm("Are you sure you want to permanently delete this Alumno?")) {
+      this.alumnoService.removeAlumno(alumno._id).subscribe(
+        res => {
+          var pos = this.alumnos.map(cat => { return alumno._id }).indexOf(alumno._id);
+          this.alumnos.splice(pos, 1);
+          this.sendInfoMsg("Alumno deleted successfully.", "success");
+          this.getAlumnos();
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  newAlumno(){
     let commentOperation:Observable<Alumno[]>;
     if(!this.editing){
-      // Create a new comment
+      // Create a Alumno
       commentOperation = this.alumnoService.addAlumno(this.model)
     } else {
-      // Update an existing comment
+      // Update an existing Alumno
       commentOperation = this.alumnoService.updateAlumno(this.model)
     }
 
     commentOperation.subscribe(
-      data => console.log(data),
-      error => console.log(error),
-      () => this.isLoading = false);
+      data => {
+        //console.log(data)
+        this.editing = false;
+        this.model = new Alumno();
+        this.sendInfoMsg("Alumno added successfully.", "success");        
+        this.getAlumnos();
+      },
+      error => {
+        console.log(error)
+      },
+      () => this.isLoading = false);    
+  }
 
+  enableEditing(alumno) {
+    this.editing = true;
+    this.model = alumno;
+  }
+
+  cancelEditing() {
+    this.editing = false;
+    this.model = new Alumno();
+    this.sendInfoMsg("item editing cancelled.", "warning");
+    // reload the cats to reset the editing
     this.getAlumnos();
   }
 
@@ -88,11 +114,6 @@ export class HelloWorldComponent implements OnInit {
     );
   }
 
-  enableEditing(cat) {
-    this.isEditing = true;
-    this.cat = cat;
-  }
-
   cancelEditing() {
     this.isEditing = false;
     this.cat = {};
@@ -112,7 +133,7 @@ export class HelloWorldComponent implements OnInit {
     );
   }
 
-  deleteCat(cat) {
+  deleteAlumno(cat) {
     if(window.confirm("Are you sure you want to permanently delete this item?")) {
       this.dataService.deleteCat(cat).subscribe(
         res => {
@@ -124,12 +145,12 @@ export class HelloWorldComponent implements OnInit {
       );
     }
   }
-
+  */
   sendInfoMsg(body, type, time = 3000) {
     this.infoMsg.body = body;
     this.infoMsg.type = type;
     window.setTimeout(() => this.infoMsg.body = "", time);
-  }*/
+  }
 
   // Alumnos
 

@@ -1,5 +1,5 @@
 export class Alumno {
-	id: number;
+	_id: number;
 	name: string;
 	promedio: number;
 	edad: number;

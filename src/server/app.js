@@ -12,8 +12,8 @@ app.use('/', express.static(__dirname + '/../../dist'));
 app.use('/', express.static(__dirname + '/../public'));
 
 app.set('superSecret', config.secret);
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
 
