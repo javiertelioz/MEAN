@@ -16,7 +16,7 @@ Run for a server.
 $ node app.js
 ```
 
-Run for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run for a dev server. Navigate to [http://localhost:4200/](http://localhost:4200/). The app will automatically reload if you change any of the source files.
 ```{r, engine='bash', count_lines}
 $ ng serve
 ```
