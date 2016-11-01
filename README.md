@@ -3,15 +3,19 @@
 ## Frontend 
  * ```Bootstrap```
  * ```Angular2``` (Pagination, JWT )
+
 ## Backend
  * ```Express```
  * ```Mongo```
  * ```Node``` (CORs, JWT, Moogose)
+
 ## Development server
+
 Run for a server.
 ```{r, engine='bash', count_lines}
 $ node app.js
 ```
+
 Run for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 ```{r, engine='bash', count_lines}
 $ ng serve
