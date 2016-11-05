@@ -4,10 +4,19 @@ var Alumno = require('../models/alumno.model.js');
 module.exports = function(app) {
   // Get all Alumno
   app.get('/api/alumnos', function(req, res) {
-    Alumno.find({}, function(err, docs) {
+
+    var page = req.params.page ? req.params.page : 2;
+
+    Alumno.paginate({}, { page: page }, function(err, result) {
+      if(err) return console.error(err);
+
+      res.json(result);
+    });
+    
+    /*Alumno.find({}, function(err, docs) {
       if(err) return console.error(err);
       res.json(docs);
-    });
+    });*/
   });
 
   // Count all
