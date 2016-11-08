@@ -1,12 +1,6 @@
 var mongoose = require('mongoose');
 var mongoosePaginate = require('mongoose-paginate');
 
-mongoosePaginate.paginate.options = { 
-  lean:  true,
-  limit: 2
-};
-
-
 var alumnoSchema = mongoose.Schema({
     name: { 
     	type: String,

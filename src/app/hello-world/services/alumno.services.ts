@@ -22,7 +22,7 @@ export class AlumnoService {
 	 */
 	getAlumnos() : Observable <Alumno[]> {
 		return this.http.get(CONFIG_APP.APP_API_HOST + 'api/alumnos')
-			.map(response => <Alumno[]> response.json())
+			.map(response => <Alumno[]> response.json().docs)
 			.catch(this.handleError);
 	}
 

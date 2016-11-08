@@ -8,6 +8,7 @@ module.exports = {
   	'/api/token',
   	'/api/authenticate',
   	'/api/alumno',
-  	'/api/alumnos'
+  	'/api/alumnos',
+    '/api/producto',
   ]
 };
