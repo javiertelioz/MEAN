@@ -27,7 +27,15 @@ module.exports = function(app) {
   app.post('/api/producto',jwt, function(req, res) {
     var obj = new Producto(req.body);
     obj.save(function(err, obj) {
-      if(err) return console.error(err);
+      if(err) {
+        return console.error(err);
+        
+        if(typeof err.errors != 'undefined') {
+          for(error err.errors) {
+            res.status(200).json(error);            
+          }
+        }
+      };
       res.status(200).json(obj);
     });
   });

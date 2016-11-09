@@ -23,9 +23,6 @@ var productoSchema = mongoose.Schema({
 		min: [0, 'Quantity can\'t minor that 0'],
 		max: [1000, 'Quantity can\'t high that 1000']
 	},
-	is_in_stock: {
-		type: Boolean,
-	},
 	descripcion: {
 		type: String,
 		required: [true, 'Descripcion is required'],
@@ -38,7 +35,19 @@ var productoSchema = mongoose.Schema({
 	},
 	video: {
 		type: String
-	}
+	},
+	manage_stock: {
+      type: Boolean,
+      required: [true, 'Manage Stock is required']
+    },
+	is_in_stock: {
+		type: Boolean,
+	},
+	status: {
+      type: String,
+      enum: ['enable', , 'disable'],
+      required: [true, 'Status is required']
+    }
 });
 
 productoSchema.plugin(mongoosePaginate);

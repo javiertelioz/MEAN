@@ -5,7 +5,7 @@ module.exports = function(app) {
   // Get all Alumno
   app.get('/api/alumnos', function(req, res) {
 
-    var page = req.params.page ? req.params.page : 2;
+    var page = req.params.page ? req.params.page : 1;
 
     Alumno.paginate({}, { page: page }, function(err, result) {
       if(err) return console.error(err);

@@ -10,5 +10,6 @@ module.exports = {
   	'/api/alumno',
   	'/api/alumnos',
     '/api/producto',
+    '/api/productos',
   ]
 };
