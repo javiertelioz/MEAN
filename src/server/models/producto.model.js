@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+
+var uniqueValidator = require('mongoose-unique-validator');
 var mongoosePaginate = require('mongoose-paginate');
 
 var productoSchema = mongoose.Schema({
@@ -15,6 +17,8 @@ var productoSchema = mongoose.Schema({
 	},
 	sku: {
 		type: String,
+		index: true,
+		unique: true,
 		required: [true, 'Sku is required']
 	},
 	quantity: {
@@ -45,11 +49,14 @@ var productoSchema = mongoose.Schema({
 	},
 	status: {
       type: String,
-      enum: ['enable', , 'disable'],
+      enum: ['enable', 'disable'],
       required: [true, 'Status is required']
     }
 });
 
+productoSchema.plugin(uniqueValidator);
 productoSchema.plugin(mongoosePaginate);
+
 var Producto = mongoose.model('Producto', productoSchema);
+
 module.exports = Producto;

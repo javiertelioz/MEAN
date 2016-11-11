@@ -24,19 +24,29 @@ module.exports = function(app) {
   });  
 
   // Create
-  app.post('/api/producto',jwt, function(req, res) {
+  app.post('/api/producto', function(req, res) {
+    
     var obj = new Producto(req.body);
+    var errMessage = {
+      message: null,
+      data : null,
+      errors: []
+    };
+
     obj.save(function(err, obj) {
       if(err) {
-        return console.error(err);
-        
-        if(typeof err.errors != 'undefined') {
-          for(error err.errors) {
-            res.status(200).json(error);            
-          }
+        for (var errName in err.errors) {
+          errMessage.errors.push(err.errors[errName].message);
         }
+        errMessage.message = "There was an error saving.";
+
+        res.status(200).json(errMessage);
       };
-      res.status(200).json(obj);
+
+      errMessage.message = "Has been successfully saved.";
+      errMessage.data = obj;
+
+      res.status(201).json(errMessage);
     });
   });
 
