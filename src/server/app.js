@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 var config = require('./config');
 
 var app = express();
-var expressWs = require('express-ws')(app);
 
 app.set('port', (process.env.PORT || 3000));
 app.set('superSecret', config.secret);
@@ -34,26 +33,13 @@ require('./routers/user.js')(app);
 require('./routers/alumno.js')(app);
 require('./routers/producto.js')(app);
 
-app.use(function (req, res, next) {
-  console.log('middleware');
-  req.testing = 'testing';
-  return next();
-});
-
 // all other routes are handled by Angular
 app.get('/app/*', function(req, res) {
   res.sendFile(path.join(__dirname,'/../../dist/index.html'));
 });
 
-app.ws('/', function(ws, req) {
-	ws.on('message', function(msg) {
-		console.log(msg);
-	});
-  console.log('socket', req.testing);
-});
-
 app.listen(app.get('port'), function() {
-  console.log('MEAN Full Stack listening on port ' + app.get('port') +
+  console.log('\nMEAN Full Stack \nListening on port ' + app.get('port') +
   	'\nCheck here http://localhost:' + app.get('port'));
 });
 

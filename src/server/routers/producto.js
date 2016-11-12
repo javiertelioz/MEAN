@@ -1,6 +1,6 @@
 // Producto Model 
 var Producto = require('../models/producto.model.js');
-var jwt = require('../middlewares/jwt');
+//var jwt = require('../middlewares/jwt');
 
 module.exports = function(app) {
 
@@ -60,17 +60,44 @@ module.exports = function(app) {
 
   // Update By ID
   app.put('/api/producto/:id', function(req, res) {
-    Producto.findOneAndUpdate({_id: req.params.id}, req.body, function(err) {
-      if(err) return console.error(err);
-      res.sendStatus(200);
+
+    var errMessage = {
+      message: null,
+      data : null,
+      errors: []
+    };
+
+    Producto.findOneAndUpdate({_id: req.params.id}, req.body, function(err, obj)  {
+
+      if(err) {
+
+        errMessage.message = "There was an error saving.";
+        errMessage.errors.push(err.message);
+        
+        res.json(errMessage);
+      }
+
+      errMessage.message = "Has been successfully updated.";
+      errMessage.data = obj;
+      res.status(200).json(errMessage);
     })
   });
 
   // Delete By ID
   app.delete('/api/producto/:id', function(req, res) {
-    Producto.findOneAndRemove({_id: req.params.id}, function(err) {
+
+    var errMessage = {
+      message: null,
+      data : null,
+      errors: []
+    };
+
+    Producto.findOneAndRemove({_id: req.params.id}, function(err, obj) {
       if(err) return console.error(err);
-      res.sendStatus(200);
+
+      errMessage.message = "Has been successfully deleted.";
+      errMessage.data = null;
+      res.status(200).json(errMessage);
     });
   });
 }

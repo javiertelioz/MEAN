@@ -1,9 +1,24 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config');
 
+
+var checkRouter = function (url, method) {
+
+  var routers = config.routesWithoutToken;
+  var method = method || 'GET';
+
+  for (var i=0; i < routers.length; i++) {
+    if (url.indexOf(routers[i].router) != -1) {
+      if(routers[i].methods == "*") return true;
+      if(routers[i].methods.indexOf(method) != -1 ) return true;
+    }
+  }
+  return false;
+}
+
 var JWT = function(req, res, next) {
   
-  if(config.routesWithoutToken.indexOf(req.originalUrl) != -1) {
+  if(checkRouter(req.originalUrl, req.method)) {
     return next();
   }
   // check header or url parameters or post parameters for token

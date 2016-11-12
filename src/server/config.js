@@ -5,11 +5,21 @@ module.exports = {
   database: 'mongodb://localhost:27017/test',
   // Excluding routes for Web Token
   routesWithoutToken: [
-  	'/api/token',
-  	'/api/authenticate',
-  	'/api/alumno',
-  	'/api/alumnos',
-    '/api/producto',
-    '/api/productos',
+    {
+     router: "/api/token",
+     methods: "GET"
+    },
+    {
+     router: "/api/authenticate",
+     methods: "POST"
+    },
+    {
+     router: "/api/alumno",
+     methods: "*"
+    },
+    {
+     router: "/api/producto",
+     methods: "GET,POST,PUT,DELETE,OPTIONS"
+    },
   ]
 };
